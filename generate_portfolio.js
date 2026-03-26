@@ -41,6 +41,11 @@ const htmlContent = `<!doctype html>
     </section>
   </div>
   
+  <div id="lightbox" class="lightbox">
+    <span class="lightbox-close">&times;</span>
+    <img class="lightbox-content" id="lightbox-img" alt="Fullscreen Edit">
+  </div>
+  
   <script type="module">
     import './src/style.css';
     
@@ -98,6 +103,42 @@ const htmlContent = `<!doctype html>
       // Keep click active as an immediate fallback
       loadMoreBtn.addEventListener('click', loadImages);
     }
+    
+    // Lightbox Logic
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const closeBtn = document.querySelector('.lightbox-close');
+
+    grid.addEventListener('click', (e) => {
+      const item = e.target.closest('.gallery-item');
+      if (item) {
+        const img = item.querySelector('img');
+        if (img) {
+          lightbox.style.display = 'flex';
+          setTimeout(() => lightbox.classList.add('active'), 10);
+          lightboxImg.src = img.src;
+          document.body.style.overflow = 'hidden';
+        }
+      }
+    });
+
+    const closeLightbox = () => {
+      lightbox.classList.remove('active');
+      setTimeout(() => {
+        lightbox.style.display = 'none';
+        document.body.style.overflow = 'auto';
+        lightboxImg.src = '';
+      }, 300);
+    };
+
+    closeBtn.addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) closeLightbox();
+    });
+    
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && lightbox.classList.contains('active')) closeLightbox();
+    });
   </script>
 </body>
 </html>
