@@ -56,4 +56,44 @@ document.addEventListener('DOMContentLoaded', () => {
     updateTime();
     setInterval(updateTime, 1000);
   }
+
+  // Universal Lightbox Logic
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+  
+  if (lightbox && lightboxImg) {
+    const closeBtn = lightbox.querySelector('.lightbox-close');
+    
+    document.addEventListener('click', (e) => {
+      const item = e.target.closest('.gallery-item');
+      if (item) {
+        const img = item.querySelector('img');
+        if (img) {
+          lightbox.style.display = 'flex';
+          setTimeout(() => lightbox.classList.add('active'), 10);
+          lightboxImg.src = img.src;
+          document.body.style.overflow = 'hidden';
+        }
+      }
+    });
+
+    const closeLightbox = () => {
+      lightbox.classList.remove('active');
+      setTimeout(() => {
+        lightbox.style.display = 'none';
+        document.body.style.overflow = 'auto';
+        lightboxImg.src = '';
+      }, 300);
+    };
+
+    if (closeBtn) closeBtn.addEventListener('click', closeLightbox);
+    
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) closeLightbox();
+    });
+    
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && lightbox.classList.contains('active')) closeLightbox();
+    });
+  }
 });

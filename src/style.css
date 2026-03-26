@@ -328,12 +328,15 @@ ul {
   border-radius: 4px;
   overflow: hidden;
   box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+  margin: 0 auto;
 }
 
 .about-image img {
   width: 100%;
   height: 100%;
+  display: block;
   object-fit: cover;
+  object-position: center;
   transition: transform var(--transition-slow);
 }
 
@@ -725,6 +728,8 @@ ul {
   backdrop-filter: blur(5px);
   opacity: 0;
   transition: opacity 0.3s ease;
+  justify-content: center;
+  align-items: center;
 }
 
 .lightbox.active {
