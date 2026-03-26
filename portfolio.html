@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Full Portfolio | Wedding Photo Editor</title>
+</head>
+
+<body>
+  <div id="app">
+    <nav class="navbar scrolled" id="navbar">
+      <div class="container nav-content">
+        <a href="/" class="logo">PD.</a>
+        <div class="nav-links">
+          <a href="/">Back to Home</a>
+        </div>
+      </div>
+    </nav>
+
+    <section class="section bg-secondary" style="padding-top: 8rem; min-height: 100vh;">
+      <div class="container">
+        <div class="section-header text-center">
+          <h2 class="section-title">All <span class="text-italic">Edits</span></h2>
+          <p class="section-subtitle">A comprehensive showcase of 287 previous edited works.</p>
+        </div>
+
+        <div class="gallery-grid" id="portfolio-grid">
+          <!-- Images injected via JS -->
+        </div>
+
+        <div class="text-center fade-up" style="margin-top: 4rem;">
+          <button id="load-more-btn" class="btn btn-primary" style="margin-right: 1rem;">Load More</button>
+          <a href="/" class="btn btn-outline">Return to Home</a>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script type="module">
+    import './src/style.css';
+
+    const allImages = ["00d24f25-0a13-4739-90c6-e2a806875e36_rw_1920.jpg", "0137245a-7b7d-42e8-9a47-fecb5a7b6f55_rw_1920.jpg", "01486248-04a0-47c7-af86-a5d274b7cdaf_rw_1920.jpg", "03b7f660-f639-4e8d-8d9c-8a11b7184306_rw_3840.jpg", "051cf435-936a-46d8-84fd-e6e15ecdc8d5_rw_1920.jpg", "05ede3fe-b424-4a69-b63f-4a029f612619_rw_1920.jpg", "05f3dfb1-66fd-4e0e-ab29-a93e4386ede0_rw_1920.jpg", "064776a5-b1c0-45c9-bb4c-5f8aeb4988f7_rw_3840.jpg", "07424a53-4bff-4523-b9ba-8161ff9ae290_rw_3840.jpg", "08503eb4-6768-40e9-b21f-042e892c2ade_rw_3840.jpg", "093d89be-0bc3-44a3-a5fa-10ab2bb4e527_rw_3840.jpg", "0a6f26c5-d3cc-4f6c-bac3-d71c3e3ab4d8_rw_1920.jpg", "0b10df9e-7aac-428f-9abf-ca96361274f9_rw_1200.jpg", "0bab28af-27b8-4e0e-8ca4-cfc3ed99a96a_rw_1920.jpg", "0be781cd-5d5d-41ee-a333-382eaeea872d_rw_3840.jpg", "0d2de245-5397-41d8-916e-0d6b0b011984_rw_1920.jpg", "0e8b44d9-e033-41fb-91ab-2128efc40c8f_rw_1920.jpg", "0ff73d62-1b35-4dc1-b0db-83c3f07a03aa_rw_1920.jpg", "101dbb04-42d4-4d3a-bf1a-e4cd2394d6db_rw_3840.jpg", "1042e94f-cef7-4b1c-96bc-5e9db1408a7a_rw_1920.jpg", "105d10d4-8815-4606-aaa1-5dbbf51738ad_rw_1920.jpg", "10721591-4e62-4845-8de8-033a50defa5b_rw_1920.jpeg", "108ce9d9-b155-42aa-9b95-cc77b9dec09d_rw_1920.jpg", "112fcfe4-cf8a-4e94-9867-afee1ec2a49b_rw_3840.jpg", "11a45d1b-22a6-4521-8516-c07736b37439_rw_1920.jpg", "11beff0b-fc4e-4a52-829a-bd8cd31ee655_rw_3840.jpeg", "12859df6-ca57-4049-97cd-5c532f7672b4_rw_1920.jpg", "12e8d7f1-64e9-434e-b7de-6ea7a34a2dea_rw_1920.jpg", "15e2d419-d596-4a10-8f1b-985cdc389c5a_rw_3840.jpg", "1697fb79-8f66-4025-bfde-718487adb6a1_rw_1920.jpg", "16dea8a9-c2be-4850-a34f-c7648400ee92_rw_1920.jpg", "175175db-1ad3-4dcd-a876-d1416674854a_rw_1920.jpeg", "17c448f7-2dcb-4cd3-9fc7-6593c98b16b7_rw_1920.jpg", "18e5fb85-7316-4e00-98bf-3dfc7aeb5f98_rw_1920.jpg", "1a4c3fc2-7f4d-4440-9b92-5e01b2b3bed8_rw_3840.jpg", "1b228b7a-5932-46a4-b378-e0e1377d8a51_rw_1920.jpg", "1c6629b2-ac24-4afa-93a3-ca068922594d_rw_1920.jpg", "1cabd0bb-4ed7-49c7-85e3-345353aacdb0_rw_1920.jpg", "1d092164-7fdc-40af-aca4-0f88f62f1d3f_rw_3840.jpg", "1f6dd26b-fb0b-4c69-8fdd-51c9bab935d4_rw_1920.jpg", "216aa4f8-f9dc-4c20-a96f-e82fc238e54d_rw_3840.jpg", "24916854-cf31-4bcd-86ba-8baff60afef2_rw_1920.jpeg", "260167ee-6a61-4f3d-b099-d5524abc71a2_rw_1920.jpg", "260179cb-83a7-48b7-a118-fbd00a2f2c30_rw_1920.jpg", "26d7a8f4-aff7-483f-8589-c7e0754c830b_rw_1920.jpg", "315e088e-b9d8-4daf-9f9c-88d66cfdff9f_rw_1920.jpg", "325e3f3e-3acd-41e5-a68e-5874cbf3de97_rw_1920.jpg", "35055b54-70e2-41de-a338-c49cb5d49f61_rw_1920.jpg", "37b689bd-4271-4a85-974a-5e5f79456bf2_rw_1920.jpg", "37e1606f-3fde-4cea-86ce-299ce8851d23_rw_1920.jpg", "3b3b25f3-efdd-4550-978e-5a918a638535_rw_1920.jpg", "3cfb6021-b0e7-4cb9-894f-5233f31c84b4_rw_1920.jpg", "3d36c3e7-773c-4ce8-9d4b-8f4afde2476a_rw_1920.jpg", "3f53349d-0484-4998-bdba-736069b222ff_rw_3840.jpg", "415c7444-c7e6-4713-8f40-d426b4b73f99_rw_1920.jpg", "41c0e380-e53f-4b51-bfbc-e59aa3e60e90_rw_1920.jpg", "43bb85f3-b9bb-4620-9e77-7d94c394a8f1_rw_1920.jpg", "44891af9-7c99-45ba-9280-761893bbae6a_rw_3840.jpg", "44a959d8-fd7f-4af4-93b4-0724331e1606_rw_1920.jpg", "45284f16-40b9-42e3-acd7-43d1c2aa965c_rw_1920.jpg", "46c95767-3c9a-4ead-b34f-37d1b4dd7129_rw_1920.jpg", "48908f25-2349-4e60-8378-1ceb7e30dec0_rw_1920.jpg", "490dbc56-10ae-4902-9474-50969ab8919d_rw_1920.jpg", "4a977c91-68dd-45ac-9153-c53d7a2e2b21_rw_3840.jpg", "4d4819fe-bf6d-42c6-a7cf-8ae3a00a0cd7_rw_1920.jpg", "4ec7fcfb-0b57-4be0-8a9c-7eb95f89467b_rw_1920.jpg", "4f7d6f32-b80d-4aa4-a7af-2dda8a2ad943_rw_3840.jpg", "50ff005d-9f31-4118-ae6c-11b4946b5e25_rw_1920.jpg", "518ca487-bac8-4dd0-86da-f0e2273e5ab1_rw_1920.jpg", "51aefc02-e997-4bc4-a977-778d677512ad_rw_3840.jpg", "5330c557-4679-4efd-988a-fd968aab5de2_rw_1920.jpg", "559217e4-391d-4d44-b9f7-db8353076aee_rw_3840.jpg", "56c94389-cd0b-43cf-af54-821137750fcd_rw_1200.jpg", "57839b3f-24b2-42d5-adfd-733ceb10946e_rw_1920.jpg", "591fa585-03cf-4070-9f1a-c45579756ee3_rw_1200.jpg", "5a044466-274d-489a-b2df-aa0c9ac8ef18_rw_1920.jpg", "5a560752-a4f2-4e45-988c-69a769f576b6_rw_1920.jpg", "5c4ec172-3b7d-4c11-9dbd-124885d2525e_rw_1920.jpg", "5d4b0629-9365-4681-b225-aa5fbd96eb09_rw_1920.jpg", "5d78c77e-929a-40ab-86d3-755ad6dd256b_rw_1920.jpg", "5d84ba83-c5df-4326-80a0-8c5cdd2e179b_rw_3840.jpg", "5dbd490f-306d-426b-a61c-51ba7fb347be_rw_3840.jpg", "5f63c105-aac8-42c9-91cc-14a78efffbf5_rw_1920.jpg", "627d10ba-4102-45ee-9e2c-f5226df4bd45_rw_1920.jpg", "652e82b9-558a-4174-b78d-86e163b043c5_rw_1920.jpg", "683ceb69-2aed-4a87-8b41-e5c5dca41963_rw_1920.jpg", "68bc1a52-064c-4258-9b60-02b05f3219cf_rw_1920.jpg", "69056fcd-a68d-4840-aa4e-46208706cddf_rw_1920.jpg", "70073eff-9c97-46a7-b80a-8c416577e963_rw_1920.jpeg", "7064b57c-5e0c-4796-ae69-c5d848552cce_rw_1920.jpg", "746a29bc-594f-458f-a323-914209f5ae5c_rw_3840.jpg", "75b34d0b-f770-4c4f-94d8-9ba62a94ad1b_rw_1920.jpg", "760617f8-b5db-4c09-a900-b0dc9d1f2327_rw_1920.jpg", "77349efc-89a5-4ab7-9e35-755d54f80c56_rw_1920.jpg", "775cac73-b81d-430d-be99-f1c67d0fbb34_rw_1920.jpg", "78a30ef5-e7ad-4de3-b0bc-cd88fa16d201_rw_1920.jpg", "7901e121-0ee7-4bbf-98cd-92dd60390f77_rw_1920.jpg", "793fc412-fc58-4954-b058-3681f72e6a70_rw_1920.jpg", "7f55e83e-d64b-4f11-b6e2-9b61c11b17a9_rw_1920.jpg", "83c7f719-9765-4122-b985-eff0a32366da_rw_1920.jpg", "83f7435f-bb97-4f23-82d8-ae18ec08306d_rw_1920.jpg", "8435a85a-12c0-4d18-93c1-4327d0ce9a20_rw_1920.jpg", "8486f086-4893-47e1-9abe-714ebf910a80_rw_1920.jpg", "84931f23-b044-47cf-b374-55acc39902f3_rw_3840.jpg", "86207e8b-ddce-48da-bd6b-3f5ffeac1f01_rw_3840.jpg", "867fa2cf-2c4d-47ae-bc6e-63abd7ed091f_rw_3840.jpg", "87abd812-29fe-4db1-889d-f0f67c32072a_rw_1920.jpg", "87ea897a-56e1-44f0-941b-ec7d2853c847_rw_1920.jpg", "89cd2323-2a7c-445d-99f0-1d28fd8e86e6_rw_1920.jpg", "8a8aa92f-863b-4e11-8041-a03cbec05a88_rw_1920.jpg", "8b376148-0ce8-46a8-8434-a0496e33dbdc_rw_1920.jpg", "8c9b7d11-c093-4926-b243-6fcfa48e9d79_rw_1920.jpg", "8cb8d7fc-725f-4fa7-affa-7e2a9f8f450f_rw_1920.jpg", "8d9baf6b-b0ca-40e1-bf3b-4f3b44d29faa_rw_3840.jpg", "8da72bcd-abdc-42c1-8624-401f2d949b6e_rw_1200.jpg", "8ead5588-dd27-487d-a5c5-abfffe31a41a_rw_1920.jpg", "908640c9-3b2f-4e4f-aae6-04c6f1252591_rw_1920.jpg", "90f0bae1-9f69-4cb9-a351-8c5501c38038_rw_1920.jpg", "946eba12-7800-47e6-8f6b-fa0ebec294e1_rw_3840.jpg", "966fa2b1-ca72-4f2d-bb1b-d3df4198a923_rw_1920.jpg", "974c828e-ac7b-423b-8b72-0d8f93e1f6f6_rw_3840.jpg", "97df709e-ade2-431e-b55b-fa9f1fa97b24_rw_1920.jpg", "9873072a-92ad-4834-b6c6-c2692699c1cd_rw_3840.jpg", "987d0cee-cb2a-438c-bf4d-08aa10886a8c_rw_1920.jpg", "98d4fe31-0538-4473-8819-d3f4f641000e_rw_3840.jpg", "9971f2e9-de3c-479f-b2c4-a43b0c06b4ed_rw_1920.jpg", "997a9331-d1ca-445a-8222-a073f303c3fb_rw_1920.jpg", "99a9ceb5-cc9a-4e6a-91bd-21306ff2bcca_rw_3840.jpg", "9c3a0992-8c16-440d-aaf9-dee9debfeca4_rw_1920.jpg", "9c4d0fbb-642b-4952-90da-ba24e577a521_rw_1920.jpg", "9c54c0ed-6236-4b42-82de-2e6609114246_rw_1920.jpg", "Ahmad & Natalie- EW (10 of 140).jpg", "Ahmad & Natalie- EW (111 of 172).jpg", "Ahmad & Natalie- EW (112 of 140).jpg", "Ahmad & Natalie- EW (119 of 142).jpg", "Ahmad & Natalie- EW (124 of 172).jpg", "Ahmad & Natalie- EW (130 of 140).jpg", "Ahmad & Natalie- EW (132 of 422).jpg", "Ahmad & Natalie- EW (138 of 140).jpg", "Ahmad & Natalie- EW (139 of 422).jpg", "Ahmad & Natalie- EW (152 of 422).jpg", "Ahmad & Natalie- EW (156 of 422).jpg", "Ahmad & Natalie- EW (19 of 142).jpg", "Ahmad & Natalie- EW (20 of 140).jpg", "Ahmad & Natalie- EW (20 of 172).jpg", "Ahmad & Natalie- EW (200 of 422).jpg", "Ahmad & Natalie- EW (26 of 172).jpg", "Ahmad & Natalie- EW (32 of 140).jpg", "Ahmad & Natalie- EW (33 of 142).jpg", "Ahmad & Natalie- EW (36 of 142).jpg", "Ahmad & Natalie- EW (39 of 140).jpg", "Ahmad & Natalie- EW (4 of 140).jpg", "Ahmad & Natalie- EW (4 of 172).jpg", "Ahmad & Natalie- EW (40 of 142).jpg", "Ahmad & Natalie- EW (50 of 172).jpg", "Ahmad & Natalie- EW (51 of 422).jpg", "Ahmad & Natalie- EW (6 of 140).jpg", "Ahmad & Natalie- EW (61 of 142).jpg", "Ahmad & Natalie- EW (64 of 140).jpg", "Ahmad & Natalie- EW (68 of 422).jpg", "Ahmad & Natalie- EW (69 of 142).jpg", "Ahmad & Natalie- EW (71 of 172).jpg", "Ahmad & Natalie- EW (73 of 142).jpg", "Ahmad & Natalie- EW (75 of 140).jpg", "Ahmad & Natalie- EW (77 of 140).jpg", "Ahmad & Natalie- EW (80 of 142).jpg", "Ahmad & Natalie- EW (82 of 172).jpg", "Ahmad & Natalie- EW (87 of 140).jpg", "Ahmad & Natalie- EW (91 of 142).jpg", "Ahmad & Natalie- EW (96 of 142).jpg", "JYS_7343.jpg", "JYS_7400.jpg", "JYS_7890.jpg", "JYS_7956.jpg", "JYS_8001.jpg", "JYS_8035.jpg", "Mike & Dhammy- EW (12 of 54).jpg", "Mike & Dhammy- EW (13 of 81).jpg", "Mike & Dhammy- EW (130 of 154).jpg", "Mike & Dhammy- EW (14 of 27).jpg", "Mike & Dhammy- EW (22 of 27).jpg", "Mike & Dhammy- EW (24 of 27).jpg", "Mike & Dhammy- EW (27 of 81).jpg", "Mike & Dhammy- EW (31 of 61).jpg", "Mike & Dhammy- EW (36 of 54).jpg", "Mike & Dhammy- EW (44 of 54).jpg", "Mike & Dhammy- EW (54 of 54).jpg", "Mike & Dhammy- EW (58 of 61).jpg", "Mike & Dhammy- EW (7 of 54).jpg", "Mike & Dhammy- EW (79 of 81).jpg", "Mike & Dhammy- EW (85 of 154).jpg", "Mohit & Meera- EW (100 of 122).jpg", "Mohit & Meera- EW (109 of 122).jpg", "Mohit & Meera- EW (117 of 122).jpg", "Mohit & Meera- EW (12 of 122).jpg", "Mohit & Meera- EW (120 of 131).jpg", "Mohit & Meera- EW (18 of 122).jpg", "Mohit & Meera- EW (28 of 61).jpg", "Mohit & Meera- EW (30 of 122).jpg", "Mohit & Meera- EW (37 of 42).jpg", "Mohit & Meera- EW (41 of 42).jpg", "Mohit & Meera- EW (43 of 61).jpg", "Mohit & Meera- EW (9 of 42).jpg", "Myuran & Shakitiya- EW (16 of 97).jpg", "Myuran & Shakitiya- EW (46 of 97).jpg", "Myuran & Shakitiya- EW (5 of 97).jpg", "Myuran & Shakitiya- EW (52 of 97).jpg", "Myuran & Shakitiya- EW (66 of 97).jpg", "Myuran & Shakitiya- EW (72 of 97).jpg", "Myuran & Shakitiya- EW (76 of 97).jpg", "Myuran & Shakitiya- EW (78 of 97).jpg", "Myuran & Shakitiya- EW (82 of 97).jpg", "Myuran & Shakitiya- EW (89 of 97).jpg", "Myuran & Shakitiya- EW (91 of 97).jpg", "a0a9a348-0591-43a7-9f7c-38fe15bb1077_rw_1920.jpg", "a1701c68-f23a-464b-9666-e59d56bb72d1_rw_1920.jpg", "a3ef08c5-75c6-41f9-be24-037e3401ee4c_rw_1920.jpg", "a435a9c6-3bb9-40d4-a55a-ef049bcda7ae_rw_1920.jpeg", "a55dfeee-a6e2-4896-b865-214c59ed9c18_rw_3840.jpg", "a5ac0b38-a266-474a-ad6f-10e5d3c22a9e_rw_1920.jpg", "a69084c1-5202-4588-8c62-841e53a5b417_rw_1920.jpg", "a801d9bd-1032-4399-90fc-b2193f42f3af_rw_1920.jpg", "a9556cae-c6f8-463e-9b2c-24a200490abf_rw_1920.jpg", "a9617b70-43e5-4871-89cd-fb457a0769a2_rw_1920.jpg", "a9cf73b0-0a12-4610-82d8-52a2f9f43cc5_rw_1920.jpg", "aa0bcb3a-ea22-461c-929a-5f4e4634a4e9_rw_1920.jpeg", "ab43da78-c1d7-42b9-b50c-98284237e5f0_rw_1920.jpg", "ae3a5d5a-957f-44e0-87dc-1ffb09f49857_rw_1920.jpg", "af79c57c-ca68-4dd0-b90b-ab8cf4d30252_rw_3840.jpg", "b1312156-daa6-46d2-867b-e8922c65600f_rw_3840.jpg", "b32ff1a0-0a65-4198-a870-031688eb971b_rw_3840.jpg", "b3715f47-f1b4-4b71-90d5-948a59df5057_rw_1920.jpg", "b37400d7-e947-47e0-a7a7-b1250635d73a_rw_1920.jpg", "b62357ba-bfec-4779-af32-0a3b2c887e51_rw_3840.jpg", "b84c9ba2-effe-4efe-88d3-cd5bc176ef74_rw_1920.jpg", "b96ebd3d-d65b-41f9-83e1-b8ae0cfca5aa_rw_1920.jpg", "b9c5720c-3e23-4ca0-b2d6-a7bd7692732e_rw_1920.jpg", "bb182860-e117-4a7b-9255-32042070b6b5_rw_3840.jpg", "bc22af5b-b645-431f-aec9-0725ffec611c_rw_1920.jpg", "bd371147-1069-4c7e-892d-90e4cb4104bf_rw_1920.jpg", "be76b833-c31b-4c0a-b549-3961f8454249_rw_1920.jpg", "bf1aa397-fe6d-4ee2-8dd5-6c7b78e6acf8_rw_1920.jpg", "bf939647-165d-4bc6-b371-d535207e9219_rw_3840.jpg", "c47f2ab2-ca22-4ad0-9624-2de96c48ac7e_rw_1920.jpg", "c5920108-ebf1-42a0-aa78-8c825ccc0a09_rw_1920.jpg", "c61fa2d1-3276-42a2-aed8-cd713a2f2e69_rw_1920.jpg", "c78359c5-0610-4ce3-852b-f1347eb787f7_rw_3840.jpg", "c7ff5f9a-f96e-4748-b3c6-5ca498f96727_rw_1920.jpg", "ca99fdfb-2dec-4b05-998b-de0d19d21c87_rw_1920.jpeg", "cac993aa-9c14-447e-b0ac-5b1cc2a417de_rw_1920.jpg", "cb30f9b7-e802-4a57-9bdc-11d4aa70327d_rw_1920.jpg", "cb8c392c-6c24-4431-8bcf-a7f75d3f2a2a_rw_1920.jpg", "cc20a19b-7ee6-4d87-8c00-2ac1ef9642e5_rw_1920.jpg", "cd49d745-7937-4089-8c1a-98109cdc2153_rw_3840.jpg", "ced7b729-7ee8-4dfb-8e7a-1c3568c18312_rw_1920.jpg", "d1442c55-0706-4466-a11b-cb32655b3bc4_rw_3840.jpg", "d1acfbf9-6013-4d1d-9002-3858c3dad240_rw_1920.jpg", "d1ee84e0-7c18-434f-ab8e-032e8d54fe42_rw_3840.jpg", "d246f4a3-86ac-4f1f-a320-4039b5d34790_rw_1920.jpg", "d2f43cc8-bb98-4d1d-94c3-a7b56f1ec1be_rw_1920.jpg", "d3a9ab1b-e282-4904-a850-c4e4d12ca1e8_rw_1920.jpg", "d463adf3-eca8-461c-af43-1491cb2d1859_rw_1920.jpg", "d4941cca-3c42-4303-84eb-2eb5f03b412a_rw_1920.jpg", "d6f92233-b27b-4e8b-9edd-90a7b3a64ee5_rw_1920.jpg", "d806fa77-9e30-4dc4-85aa-b8dad5b12266_rw_1920.jpg", "d8ea3b73-fabe-47c6-bfd5-bd4f1dcb3273_rw_1920.jpg", "d9617240-ac43-4776-abf0-738152ce9a79_rw_1920.jpeg", "dad49da0-2cb1-49a1-89e5-3c4e03c03c2e_rw_1920.jpg", "dc404ec7-eb2f-47e1-8d5e-5baa07ae48a0_rw_1920.jpg", "dc9b6aa8-422d-40ef-abc5-2c588b556eb9_rw_1920.jpg", "de8cead6-7bc0-44cd-939c-ef056c9e5bec_rw_1920.jpg", "e11c3c62-204b-4eba-acc9-73945ae201af_rw_3840.jpg", "e1979fed-ba71-4b1e-97d2-6b6bb92b7ece_rw_1920.jpg", "e319d56d-94c9-41ae-8436-b0893f05d4d6_rw_1920.jpg", "e3bc7ade-0014-44b4-9667-a09b6b3850e7_rw_1920.jpg", "e56a6932-5a5f-4f05-8218-0001a1246da3_rw_3840.jpg", "e6954492-2e67-423f-92c1-f0d2973f04b8_rw_1920.jpg", "e9781197-7019-4bca-a99c-ad89ec779745_rw_1920.jpg", "e9b8755f-ca3d-4bae-83e7-f4094d9a78a1_rw_3840.jpg", "eef2f164-45fb-4af0-9687-78abf9349d24_rw_3840.jpg", "f22d5877-b08f-4944-b858-b526a8aa1dd7_rw_1920.jpg", "f4752749-2a4a-439e-a08c-7dbed330710a_rw_3840.jpg", "f5caa34a-2aa4-4897-9cbc-cda630c58419_rw_3840.jpg", "f6a6375d-d2b3-4508-b859-a5c226554fe3_rw_1920.jpg", "f8479e69-2230-485a-8e26-c36c66104ba1_rw_1920.jpg", "fad3ba74-79c9-45e0-91bb-2f85cc2cc8a7_rw_1920.jpg", "fdf8d0b7-bb63-4166-a263-8d348e4ab477_rw_1920.jpg"];
+    const grid = document.getElementById('portfolio-grid');
+    const loadMoreBtn = document.getElementById('load-more-btn');
+
+    let currentIndex = 0;
+    const batchSize = 24; // Load 24 images at a time for optimal performance
+
+    function loadImages() {
+      const fragment = document.createDocumentFragment();
+      const endIndex = Math.min(currentIndex + batchSize, allImages.length);
+
+      for (let i = currentIndex; i < endIndex; i++) {
+        const file = allImages[i];
+        const item = document.createElement('div');
+        item.className = 'gallery-item fade-up visible';
+        item.style.opacity = '1';
+        item.style.transform = 'translateY(0)';
+
+        const img = document.createElement('img');
+        img.src = '/my portfolio/' + file;
+        img.alt = 'Edited Work';
+        img.loading = 'lazy';
+
+        const overlay = document.createElement('div');
+        overlay.className = 'gallery-overlay';
+
+        item.appendChild(img);
+        item.appendChild(overlay);
+        fragment.appendChild(item);
+      }
+
+      grid.appendChild(fragment);
+      currentIndex = endIndex;
+
+      if (currentIndex >= allImages.length) {
+        loadMoreBtn.style.display = 'none';
+      }
+    }
+
+    // Initial load
+    loadImages();
+
+    // Infinite Scroll Implementation
+    const scrollObserver = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting && currentIndex < allImages.length) {
+        loadImages();
+      }
+    }, { rootMargin: '500px' }); // Trigger load 500px before the user reaches the button
+
+    if (loadMoreBtn) {
+      scrollObserver.observe(loadMoreBtn);
+      // Keep click active as an immediate fallback
+      loadMoreBtn.addEventListener('click', loadImages);
+    }
+  </script>
+</body>
+
+</html>
