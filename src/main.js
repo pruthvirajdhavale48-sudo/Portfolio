@@ -57,6 +57,30 @@ document.addEventListener('DOMContentLoaded', () => {
     setInterval(updateTime, 1000);
   }
 
+  // Anti-theft: Disable right-click globally
+  document.addEventListener('contextmenu', (e) => e.preventDefault());
+
+  // Anti-theft: Disable dragging of images
+  document.addEventListener('dragstart', (e) => {
+    if (e.target.tagName === 'IMG') {
+      e.preventDefault();
+    }
+  });
+
+  // Anti-theft: Disable specific keyboard shortcuts (F12, Inspect, Save, View Source)
+  document.addEventListener('keydown', (e) => {
+    if (
+      e.key === 'F12' ||
+      (e.ctrlKey && e.shiftKey && ['I', 'i', 'J', 'j', 'C', 'c'].includes(e.key)) ||
+      (e.ctrlKey && ['U', 'u', 'S', 's'].includes(e.key)) ||
+      (e.metaKey && e.altKey && ['I', 'i', 'J', 'j', 'C', 'c'].includes(e.key)) ||
+      (e.metaKey && ['U', 'u', 'S', 's'].includes(e.key)) ||
+      e.key === 'PrintScreen'
+    ) {
+      e.preventDefault();
+    }
+  });
+
   // Universal Lightbox Logic
   const lightbox = document.getElementById('lightbox');
   const lightboxImg = document.getElementById('lightbox-img');
