@@ -44,6 +44,10 @@
 
   <script type="module">
     import './src/style.css';
+    import { injectSpeedInsights } from '@vercel/speed-insights';
+
+    // Initialize Vercel Speed Insights
+    injectSpeedInsights();
 
     // Anti-theft: Disable right-click globally
     document.addEventListener('contextmenu', (e) => e.preventDefault());
